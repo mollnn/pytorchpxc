@@ -10,14 +10,17 @@ int main()
     {
         std::stringstream ss;
         double x = i * 0.01;
-        double y = sin(x);
-        ss << x << " " << y;
+        double r = rand() * 0.00003;
+        double y = x * x;
+        ss << x << " " << r << " " << x << " " << r << " " << x << " " << y;
         nn.tPutData(ss.str());
     }
     nn.tFlushData();
     nn.tTrain();
     nn.tTrainPlus();
     nn.eLoad();
-    cout << nn.eEval("0.2 0.0") << endl;
-    cout << nn.eEval("0.7 0.0") << endl;
+    cout << nn.eEval("1.0 0.0 1.0 0.0 1.0 0.0") << endl; // 1.0
+    cout << nn.eEval("0.5 0.0 0.5 0.0 0.5 0.0") << endl; // 0.25
+    cout << nn.eEval("0.0 0.0 0.0 0.0 0.0 0.0") << endl; // 0.0
+    cout << nn.eEval("0.5 0.2 0.5 0.7 0.5 0.0") << endl; // 0.25
 }

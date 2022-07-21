@@ -1,7 +1,8 @@
 batch_size = 32
-learning_rate = 0.01
+learning_rate = 0.02
 n_epoch = 5
-dim_input = 1
+dim_raw_input = 5
+dim_input = 64
 dim_output = 1
 model_filename = "model.pt"
 optimizer_filename = "optimizer.pt"

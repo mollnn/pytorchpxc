@@ -9,6 +9,7 @@ from utils import *
 from model import *
 from config import *
 from dataset import *
+from encode import *
 import sys
 
 model = None
@@ -32,7 +33,10 @@ def eval(sss):
     criterion = torch.nn.MSELoss()
 
     for batch_idx, (b_x, b_y) in enumerate(eval_dataloader):
-        x = b_x.view(-1, 1)
+        x = b_x.view(-1, dim_raw_input)
+        x = my_encoding_batch(x)
+        x = torch.tensor(x)
+        print(x.shape)
         if use_cuda: x=x.cuda()
         out = model(x)
         return float(out.item())

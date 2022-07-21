@@ -9,6 +9,7 @@ from utils import *
 from model import *
 from config import *
 from dataset import *
+from encode import *
 
 
 def train(NEW_MODEL = True):
@@ -17,7 +18,7 @@ def train(NEW_MODEL = True):
 
     if NEW_MODEL:
         print("[PYINFO] create new model")
-        model = Model()
+        model = MyModel()
         model.apply(weights_init)
         optimizer = torch.optim.Adam(model.parameters(), learning_rate)
     else:
@@ -31,7 +32,9 @@ def train(NEW_MODEL = True):
     for epoch in range(n_epoch):
         train_loss = 0
         for batch_idx, (b_x, b_y) in tqdm(enumerate(train_dataloader)):
-            x = b_x.view(-1, 1)
+            x = b_x.view(-1, dim_raw_input)
+            x = my_encoding_batch(x)
+            x = torch.tensor(x)
             if use_cuda: x=x.cuda()
             y_true = b_y
             if use_cuda: y_true=y_true.cuda()
