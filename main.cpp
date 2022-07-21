@@ -1,4 +1,8 @@
-#include <bits/stdc++.h>
+#include <iostream>
+#include <cstdio>
+#include <vector>
+#include <cstring>
+#include <sstream>
 #include "pytorchpxc.h"
 using namespace std;
 
@@ -6,6 +10,7 @@ int main()
 {
     PytorchProxyC nn;
     nn.eInit();
+    nn.tInit();
     for (int i = 1; i <= 100; i++)
     {
         std::stringstream ss;
